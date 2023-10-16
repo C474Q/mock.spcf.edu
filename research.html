@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://spcf.edu.ph/images/spcf.ico" type="image/png">
+    <title>Research Database (Faculty and Student Academic Works) | Systems Plus College Foundation</title>
+</head>
+<style>
+        /* Add custom CSS for animations */
+        .container-enter-active, .container-leave-active {
+            transition: opacity 0.5s;
+        }
+        .container-enter, .container-leave-to {
+            opacity: 0;
+        }
+
+        .dropdown-container:hover .dropdown-content {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .dropdown-content {
+        display: block;
+        position: absolute;
+        background-color: #fff;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        }
+
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .fixed-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        @keyframes bobble {
+            0%, 100% {
+            transform: translateY(0);
+            }
+            50% {
+            transform: translateY(-20px);
+            }  
+        }
+
+        /* Apply the animation to the button on hover */
+        .bobble:hover {
+            animation: bobble 1s ease infinite;
+        }
+
+            /* Add this style to your existing CSS file or in a <style> tag in your HTML */
+        .footer-link {
+        color: white;
+        transition: color 0.3s ease, transform 0.3s ease;
+        transform: translateX(0); /* Initial position */
+        }
+
+        .footer-link:hover {
+        color: #3498db; /* Change to your desired hover color */
+        transform: translateX(5px); /* Adjust the value as needed for the desired slide effect */
+        }
+        
+        /* CSS for Counting Animation */
+        @keyframes countUp {
+          from { transform: translateY(10px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .count-up {
+          animation: countUp 1s ease-in-out;
+        }
+   
+        .circle-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+</style>
+
+<body>
+<!--Header-->
+<div>
+    <!--loading screen-->
+    <div id="loading-screen" class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-white z-50">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+        <script>
+            // JavaScript code to hide the loading screen when your website is ready
+            document.addEventListener("DOMContentLoaded", function () {
+                setTimeout(function () {
+                    document.getElementById("loading-screen").style.display = "none";
+                }, 2000); // Change the time as needed
+            });
+        </script>
+    <!--loading screen-->
+    
+    <!--Scroll Menu-->
+    
+    <div id="app">
+        <!-- Large screen containers (show on scroll) -->
+        <transition name="container" mode="out-in">
+        <div v-if="showLarge" key="large" class="scroll-hdr" style="z-index: 30;">
+            <div class="scr-hdr-prp">
+    
+                <div class="scr-hdr-tab dropdown-container" style="z-index: 30;">
+                    <button type="button" class="scr-hdr-btn">
+                        About
+                    </button>
+                    <ul class="dropdown-content">
+                        <li><a href="history.html" class="scr-hdr-drp">History</a></li>
+                        <li><a href="research.html" class="scr-hdr-drp">Research Database</a></li>
+                        <li><a href="spcnian-hymn.html" class="scr-hdr-drp">SPCNIAN Hymn</a></li>
+                    </ul>
+                </div>
+            
+                <div class="scr-hdr-tab dropdown-container">
+                    <button type="button" class="scr-hdr-btn">
+                        Admissions
+                    </button>
+                    <ul class="dropdown-content">
+                        <li><a href="adm-ol-app.html" class="scr-hdr-drp">Online Application</a></li>
+                    </ul>
+                </div>
+            
+                <div class="scr-hdr-tab dropdown-container">
+                        <button type="button" class="scr-hdr-btn">
+                            Academics
+                        </button>
+                        <ul class="dropdown-content">
+                            <li><a href="office-of-the-registrar.html" class="scr-hdr-drp">Office of the Registrar</a></li>
+                            <li><a href="basic-ed.html" class="scr-hdr-drp">Basic Education Department</a></li>
+                            <li><a href="acad-cassed.html" class="scr-hdr-drp">College Of Arts And Social Sciences And Education</a></li>
+                            <li><a href="acad-cob.html" class="scr-hdr-drp">College Of Business</a></li>
+                            <li><a href="acad-ccis.html" class="scr-hdr-drp">College Of Computing And Information Sciences</a></li>
+                            <li><a href="acad-COC.html" class="scr-hdr-drp">College Of Criminology</a></li>
+                            <li><a href="acad-coeng.html" class="scr-hdr-drp">College Of Engineering</a></li>
+                            <li><a href="acad-chm.html" class="scr-hdr-drp">College Of Hospitality Management</a></li>
+                            <li><a href="acad-con.html" class="scr-hdr-drp">College Of Nursing</a></li>
+                        </ul>
+                </div>
+                
+                <div class="scr-hdr-tab dropdown-container">
+                        <button type="button" class="scr-hdr-btn">
+                            Student Services
+                        </button>
+                        <ul class="dropdown-content">
+                            <li><a href="studserv-apc.html" class="scr-hdr-drp">Alumni And Placement Center</a></li>
+                            <li><a href="studserv-acap.html" class="scr-hdr-drp">Assessment, Counseling, And Placement Center</a></li>
+                            <li><a href="studserv-sag.html" class="scr-hdr-drp">Scholarships And Grants</a></li>
+                            <li><a href="studserv-osa.html" class="scr-hdr-drp">Student Affairs Program</a></li>
+                        </ul>
+                </div>
+            
+                <div class="scr-hdr-tab dropdown-container">
+                        <button type="button" class="scr-hdr-btn">
+                            Facilities
+                        </button>
+                        <ul class="dropdown-content">
+                            <li><a href="facilities.html" class="scr-hdr-drp">All Facilities</a></li>
+                        </ul>
+                </div>
+                
+                <div class="scr-hdr-tab dropdown-container">
+                        <button type="button" class="scr-hdr-btn">
+                            Data Privacy
+                        </button>
+                        <ul class="dropdown-content">
+                            <li><a href="breach-report.html" class="scr-hdr-drp">Breach Report</a></li>
+                        </ul>
+                </div>
+            
+                <div class="scr-hdr-tab dropdown-container">
+                        <button type="button" class="scr-hdr-btn">
+                            IELTS
+                        </button>
+                        <ul class="dropdown-content">
+                            <li><a href="IELTS.html" class="scr-hdr-drp">International English Language Testing System</a></li>
+                        </ul>
+                </div>
+        
+            </div> 
+        </div>
+    
+        </transition>
+        <!-- Large screen second containers (show on scroll) -->
+        <transition name="container" mode="out-in">
+            <div v-if="showLarge" key="large2" class="scroll-qal" style="z-index: 20;">
+                <div class="scr-qal-ttl">
+                    <!-- Large text on the left -->
+                    <div style="width: 50%;">
+                        <h1 class="scr-qal-txt">Quick Access Links</h1>
+                    </div>
+    
+                    <!-- Four square buttons on the right -->
+                    <div class="scr-qal-tab">
+                        <!-- Button 1 -->
+            <a href="https://spcf.edu.ph/enrollment/public/payment_form?fbclid=IwAR1vfJnVwn62NP9jKiAfYCeRPei-hEJlqij7JlHy-OSABj1tKVDxIDObpLE">
+            <div class="scr-qal-img image-button"
+                data-default-image="images/pay.png"
+                data-hover-image="images/pay_hover.png">
+                <img src="images/pay.png" alt="Button Icon 1" class="scr-qal-img-prp" />
+                <span class="text-[10px]">Pay Online</span>
+            </div>
+            </a>
+    
+            <!-- Button 2 -->
+            <a href="http://portal.spcf.edu.ph/Login.php">
+            <div class="scr-qal-img image-button"
+                data-default-image="images/portal.png"
+                data-hover-image="images/portal_hover.png">
+                <img src="images/portal.png" alt="Button Icon 2" class="scr-qal-img-prp" />
+                <span class="text-[10px]">Student Portal</span>
+            </div>
+            </a>
+    
+            <!-- Button 3 -->
+            <a href="http://box104.spcf.edu.ph/Login.php">
+            <div class="scr-qal-img image-button"
+                data-default-image="images/campus++.png"
+                data-hover-image="images/campus++_hover.png">
+                <img src="images/campus++.png" alt="Button Icon 3" class="scr-qal-img-prp" />
+                <span class="text-[10px]">Campus++</span>
+            </div>
+            </a>
+    
+            <!-- Button 4 -->
+            <a href="https://www.spcf.edu.ph/contact">
+            <div class="scr-qal-img image-button"
+                    data-default-image="images/contact.png"
+                    data-hover-image="images/contact_hover.png">
+                <img src="images/contact.png" alt="Button Icon" class="scr-qal-img-prp" />
+                <span class="text-[10px]">Contact Us</span>
+            </div>
+            </a>
+    
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                showLarge: false,
+                showSmall: false,
+            },
+            mounted() {
+                window.addEventListener('scroll', this.handleScroll);
+                this.handleScroll(); // Trigger initial check
+            },
+            methods: {
+                handleScroll() {
+                    const scrollY = window.scrollY;
+                    // You can adjust the threshold as needed
+                    const threshold = 200;
+    
+                    // Show/hide the large screen containers
+                    if (window.innerWidth >= 1024) {
+                        this.showLarge = scrollY >= threshold;
+                    }
+    
+                    // Show/hide the small screen containers
+                    if (window.innerWidth < 1024) {
+                        this.showSmall = scrollY >= threshold;
+                    }
+                },
+            },
+        });
+    </script>
+    
+    <!--Scroll Menu-->
+    
+    <!-- Large screen containers (hidden on small screens) -->
+    <div class="header-prp">
+      <div class="hdr-cnt">
+        <!-- Logo on the left -->
+        <a href="index.html">
+        <div class="hdr-ctr">
+          <img src="images/logo.png" alt="Logo" class="hdr-logo" /> <!-- Adjust the image source and size accordingly -->
+          <h1 class="hdr-ttl" style="font-family: 'Times New Roman', Times, serif;">Systems Plus College Foundation</h1>
+        </div>
+        </a>
+        
+        <!-- Text and Button on the right -->
+        <div class="hdr-ctr">
+            <div>
+            <p class="hdr-txt">For inquires please contact Admissions Office</p>
+            <p class="hdr-contact">0919-069-2914</p>
+            </div>
+          <button class="hdr-btn">Apply Now!</button>
+        </div>
+      </div>
+    </div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.x.x/dist/alpine.min.js" defer></script>
+    
+    <div class="navbar">
+        <div class="nav-prp">
+    
+            <div class="nav-drp dropdown-container">
+            <button type="button" class="nav-tab">
+                About
+            </button>
+            <ul class="dropdown-content">
+                <li><a href="history.html" class="nav-drp-menu">History</a></li>
+                <li><a href="research.html" class="nav-drp-menu">Research Database</a></li>
+                <li><a href="spcnian-hymn.html" class="nav-drp-menu">SPCNIAN Hymn</a></li>
+            </ul>
+            </div>
+    
+            <div class="relative inline-block text-left dropdown-container">
+            <button type="button" class="nav-tab">
+                Admissions
+            </button>
+            <ul class="dropdown-content">
+                <li><a href="adm-ol-app.html" class="nav-drp-menu">Online Application</a></li>
+            </ul>
+            </div>
+    
+            <div class="relative inline-block text-left dropdown-container">
+                <button type="button" class="nav-tab">
+                    Academics
+                </button>
+                <ul class="dropdown-content">
+                    <li><a href="office-of-the-registrar.html" class="nav-drp-menu">Office of the Registrar</a></li>
+                    <li><a href="basic-ed.html" class="nav-drp-menu">Basic Education Department</a></li>
+                    <li><a href="acad-cassed.html" class="nav-drp-menu">College Of Arts And Social Sciences And Education</a></li>
+                    <li><a href="acad-cob.html" class="nav-drp-menu">College Of Business</a></li>
+                    <li><a href="acad-ccis.html" class="nav-drp-menu">College Of Computing And Information Sciences</a></li>
+                    <li><a href="acad-COC.html" class="nav-drp-menu">College Of Criminology</a></li>
+                    <li><a href="acad-coeng.html" class="nav-drp-menu">College Of Engineering</a></li>
+                    <li><a href="acad-chm.html" class="nav-drp-menu">College Of Hospitality Management</a></li>
+                    <li><a href="acad-con.html" class="nav-drp-menu">College Of Nursing</a></li>
+                    
+                </ul>
+            </div>
+        
+            <div class="relative inline-block text-left dropdown-container">
+                <button type="button" class="nav-tab">
+                    Student Services
+                </button>
+                <ul class="dropdown-content">
+                    <li><a href="studserv-apc.html" class="nav-drp-menu">Alumni And Placement Center</a></li>
+                    <li><a href="studserv-acap.html" class="nav-drp-menu">Assessment, Counseling, And Placement Center</a></li>
+                    <li><a href="studserv-sag.html" class="nav-drp-menu">Scholarships And Grants</a></li>
+                    <li><a href="studserv-osa.html" class="nav-drp-menu">Student Affairs Program</a></li>
+                </ul>
+            </div>
+    
+            <div class="relative inline-block text-left dropdown-container">
+                <button type="button" class="nav-tab">
+                    Facilities
+                </button>
+                <ul class="dropdown-content">
+                    <li><a href="facilities.html" class="nav-drp-menu">All Facilities</a></li>
+                </ul>
+            </div>
+        
+            <div class="relative inline-block text-left dropdown-container">
+                <button type="button" class="nav-tab">
+                    Data Privacy
+                </button>
+                <ul class="dropdown-content">
+                    <li><a href="breach-report.html" class="nav-drp-menu">Breach Report</a></li>
+                </ul>
+            </div>
+    
+            <div class="relative inline-block text-left dropdown-container">
+                <button type="button" class="nav-tab">
+                    IELTS
+                </button>
+                <ul class="dropdown-content">
+                    <li><a href="IELTS.html" class="nav-drp-menu">International English Language Testing System</a></li>
+                </ul>
+            </div>
+    
+        </div> 
+    
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageButtons = document.querySelectorAll('.image-button');
+    
+            imageButtons.forEach(button => {
+                const img = button.querySelector('img');
+                const defaultImage = img.src;
+                const hoverImage = button.getAttribute('data-hover-image');
+    
+                button.addEventListener('mouseenter', () => {
+                    img.src = hoverImage;
+                });
+    
+                button.addEventListener('mouseleave', () => {
+                    img.src = defaultImage;
+                });
+            });
+        });
+    </script>
+    
+    <div class="qal">
+        <div class="flex mx-16 lg:mx-32 py-2">
+        <!-- Large text on the left -->
+        <div style="width: 50%;">
+            <h1 class="qal-ttl">Quick Access Links</h1>
+        </div>
+    
+        <!-- Four square buttons on the right -->
+        <div class="qal-tab">
+            <!-- Button 1 -->
+            <a href="https://spcf.edu.ph/enrollment/public/payment_form?fbclid=IwAR1vfJnVwn62NP9jKiAfYCeRPei-hEJlqij7JlHy-OSABj1tKVDxIDObpLE">
+            <div class="qal-btn image-button"
+                data-default-image="images/pay.png"
+                data-hover-image="images/pay_hover.png">
+                <img src="images/pay.png" alt="Button Icon 1" class="h-6 w-6 mb-2" />
+                <span class="text-[10px]">Pay Online</span>
+            </div>
+            </a>
+    
+            <!-- Button 2 -->
+            <a href="http://portal.spcf.edu.ph/Login.php">
+            <div class="qal-btn image-button"
+                data-default-image="images/portal.png"
+                data-hover-image="images/portal_hover.png">
+                <img src="images/portal.png" alt="Button Icon 2" class="h-6 w-6 mb-2" />
+                <span class="text-[10px]">Student Portal</span>
+            </div>
+            </a>
+    
+            <!-- Button 3 -->
+            <a href="http://box104.spcf.edu.ph/Login.php">
+            <div class="qal-btn image-button"
+                data-default-image="images/campus++.png"
+                data-hover-image="images/campus++_hover.png">
+                <img src="images/campus++.png" alt="Button Icon 3" class="h-6 w-6 mb-2" />
+                <span class="text-[10px]">Campus++</span>
+            </div>
+            </a>
+    
+            <!-- Button 4 -->
+            <a href="https://www.spcf.edu.ph/contact">
+            <div class="qal-btn image-button"
+                data-default-image="images/contact.png"
+                data-hover-image="images/contact_hover.png">
+            <img src="images/contact.png" alt="Button Icon" class="h-6 w-6 mb-2" />
+            <span class="text-[10px]">Contact Us</span>
+            </div>
+            </a>
+    
+        </div>
+        </div>
+    </div>
+    
+    <!-- Small screen containers (hidden on large screens) -->
+    <!-- Header -->
+    <header class="m-hdr fixed-header">
+        <div class="m-hdr-cnt">
+            <button id="toggleSidebar" class="m-sb-btn">
+                &#9776;
+            </button>
+            <div class="hdr-ctr">
+                <img src="images/logo.png" alt="Logo" class="m-hdr-logo">
+                <h1 class="m-hdr-ttl">SPCF</h1>
+                <h1 class="m-hdr-txt">Systems Plus College Foundation</h1>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Sidebar -->
+    <aside id="sidebar" class="m-sb fixed-sidebar">
+        <!-- Button to close the sidebar -->
+        <button id="closeSidebar" class="m-sb-x">
+            &#x2715;
+        </button>
+    
+        <!-- First Accordion -->
+        <div class="p-4">
+            <button class="m-sb-menu" onclick="toggleAccordion('accordion1')">Quick Access Links</button>
+            <div id="accordion1" class="hidden">
+                <ul>
+                    <li><a href="https://spcf.edu.ph/enrollment/public/payment_form?fbclid=IwAR1vfJnVwn62NP9jKiAfYCeRPei-hEJlqij7JlHy-OSABj1tKVDxIDObpLE" class="m-sb-drp">Pay Online</a></li>
+                    <li><a href="http://portal.spcf.edu.ph/Login.php" class="m-sb-drp">Student Portal</a></li>
+                    <li><a href="http://box104.spcf.edu.ph/Login.php" class="m-sb-drp">Campus++</a></li>
+                    <li><a href="https://www.spcf.edu.ph/contact" class="m-sb-drp">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <!-- Second Accordion -->
+        <div class="p-4">
+            <button class="m-sb-menu" onclick="toggleAccordion('accordion2')">About</button>
+            <div id="accordion2" class="hidden">
+                <ul>
+                    <li><a href="history.html" class="m-sb-drp">History</a></li>
+                    <li><a href="research.html" class="m-sb-drp">Research Database</a></li>
+                    <li><a href="spcnian-hymn.html" class="m-sb-drp">SPCNIAN Hymn</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="p-4">
+            <button class="m-sb-menu" onclick="toggleAccordion('accordion3')">Admissions</button>
+            <div id="accordion3" class="hidden">
+                <ul>
+                    <li><a href="adm-ol-app.html" class="m-sb-drp">Online Application</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="p-4">
+            <button class="m-sb-menu" onclick="toggleAccordion('accordion4')">Academics</button>
+            <div id="accordion4" class="hidden">
+                <ul>
+                    <li><a href="office-of-the-registrar.html" class="m-sb-drp">Office of the Registrar</a></li>
+                    <li><a href="basic-ed.html" class="m-sb-drp">Basic Education Department</a></li>
+                    <li><a href="acad-cassed.html" class="m-sb-drp">College Of Arts And Social Sciences And Education</a></li>
+                    <li><a href="acad-cob.html" class="m-sb-drp">College Of Business</a></li>
+                    <li><a href="acad-ccis.html" class="m-sb-drp">College Of Computing And Information Sciences</a></li>
+                    <li><a href="acad-cob.html" class="m-sb-drp">College Of Criminology</a></li>
+                    <li><a href="acad-coeng.html" class="m-sb-drp">College Of Engineering</a></li>
+                    <li><a href="acad-chm.html" class="m-sb-drp">College Of Hospitality Management</a></li>
+                    <li><a href="acad-con.html" class="m-sb-drp">College Of Nursing</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="p-4">
+            <button class="m-sb-menu" onclick="toggleAccordion('accordion5')">Student Services</button>
+            <div id="accordion5" class="hidden">
+                <ul>
+                    <li><a href="studserv-apc.html" class="m-sb-drp">Alumni And Placement Center</a></li>
+                    <li><a href="studserv-acap.html" class="m-sb-drp">Assessment, Counseling, And Placement Center</a></li>
+                    <li><a href="studserv-sag.html" class="m-sb-drp">Scholarships And Grants</a></li>
+                    <li><a href="studserv-osa.html" class="m-sb-drp">Student Affairs Program</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="p-4">
+            <button class="m-sb-menu" onclick="toggleAccordion('accordion6')">Facilities</button>
+            <div id="accordion6" class="hidden">
+                <ul>
+                    <li><a href="facilities.html" class="m-sb-drp">All Facilities</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="p-4">
+            <button class="m-sb-menu" onclick="toggleAccordion('accordion7')">Data Privacy</button>
+            <div id="accordion7" class="hidden">
+                <ul>
+                    <li><a href="breach-report.html" class="m-sb-drp">Breach Report</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="p-4">
+            <button href="IELTS.html" class="m-sb-menu" onclick="toggleAccordion('accordion8')">IELTS</button>
+            <div id="accordion8" class="hidden">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    
+    <script>
+        const toggleButton = document.getElementById('toggleSidebar');
+        const closeSidebarButton = document.getElementById('closeSidebar');
+        const sidebar = document.getElementById('sidebar');
+        let openAccordion = null;
+    
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+    
+        closeSidebarButton.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+        });
+    
+        function toggleAccordion(id) {
+            const accordion = document.getElementById(id);
+            if (accordion !== openAccordion) {
+                // Close the currently open accordion
+                if (openAccordion) {
+                    openAccordion.classList.add('hidden');
+                }
+                // Open the clicked accordion
+                accordion.classList.remove('hidden');
+                openAccordion = accordion;
+            } else {
+                // Toggle the clicked accordion if it's already open
+                accordion.classList.toggle('hidden');
+                openAccordion = null;
+            }
+        }
+    </script>
+</div>
+<!--Header-->
+
+<!--Spacer-->
+<div class="spcr"></div>
+<!--Spacer-->
+
+<!--imagebg header-->
+<div class="img-hdr" style="background-image: url('images/home_gallery_10.jpg');">
+    <!-- Container with background image -->
+    <div class="img-hdr-cnt">
+        <!-- Apply color filter here -->
+        <div class="img-hdr-clr"></div>
+    </div>
+  
+    <div class="container img-hdr-c">
+      <!-- Logo and text container -->
+      <div class="img-hdr-con">
+        <img src="images/logo.png" alt="Company Logo" class="img-hdr-logo" />
+  
+        <div style="margin-left: 1rem;">
+          <h1 class="img-hdr-ttl">Research Database</h1>
+          <p class="text-md img-hdr-txt">(Faculty and Student Academic Works)</p>
+        </div>
+      </div>
+    </div>
+</div>
+<!--imagebg header-->
+
+<h2 class="text-2xl font-semibold my-4 mx-4">FACULTY RESEARCHES</h2>
+
+<!--Tabbed Container-->
+<div class="container tab-cnt">
+    <!-- Tab Buttons -->
+    <ul class="flex">
+        <li class="flex-1">
+            <a href="#tab-1a" data-tab="tab-1a" class="tab-tabs">2015-2016</a>
+        </li>
+        <li class="flex-1">
+            <a href="#tab-2a" data-tab="tab-2a" class="tab-tabs">2018-2019</a>
+        </li>
+        <li class="flex-1">
+            <a href="#tab-3a" data-tab="tab-3a" class="tab-tabs">2019-2020</a>
+        </li>
+        
+    </ul>
+    <div class="tab-con">
+        <!-- Tab Content -->
+        <div class="tab-in">
+            <!-- Tab 1 Content (visible by default) -->
+            <div id="tab-1a" class="tab-content">
+                <ul class="pl-4 list-disc">
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4" href="https://drive.google.com/file/d/1WCwPdHGls0v0_Jq1QD3ahaVMku5QgASF/view?usp=drive_link">Determinants of Students’ Motivation towards Entrepreneurship</a></li>
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4" href="https://drive.google.com/file/d/1zpJdEmmGLXYOQ8iFKIcaO9dGy2l4wFJz/view?usp=sharing">Effects of Social Media on Student Learning at the College of Business, Systems Plus College Foundation</a></li>
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4" href="https://drive.google.com/file/d/1zpJdEmmGLXYOQ8iFKIcaO9dGy2l4wFJz/view?usp=sharing">Notice of Acceptance -RMTU-IRC</a></li>
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4" href="https://drive.google.com/file/d/12rR6h1WeccmtqL13BQKfgBQ9nysugDeQ/view?usp=drive_link">The Impact of Social Media Usage on Marketing Activities and Growth of Small and Medium Enterprises in Selected Metro Clark Area/a></li>
+                </ul>
+            </div>
+
+            <!-- Tab 2 Content (hidden by default) -->
+            <div id="tab-2a" class="hidden tab-content">
+                <ul class="pl-4 list-disc">
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4" href="https://drive.google.com/file/d/1dFHu7UXglMOKotdIZ8QcF68dKiUVt_7j/view?usp=drive_link">A Tracer Study of Bachelor of Science in Accountancy (BSA) Graduates from 2014 to 2019, Systems Plus College Foundation</a></li>
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4" href="https://drive.google.com/file/d/1NpbeqwZjs2OM0LJXHkNub_eRIFKFmT5O/view?usp=drive_link">A Tracer Study of BS Business Administration Graduates from 2015 to 2019, Systems Plus College Foundation</a></li>
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4" href="https://drive.google.com/file/d/1m_xLXukYkJ61OAGvcYN9TJ8sb8umFZ--/view?usp=drive_link">Correlation of the On-the-Job Training (Practicum) and Academic Performance: The case of BSBA Students of the College of Business, Systems Plus College Foundation, AY 2018-2019</a></li>
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4" href="https://drive.google.com/file/d/1qCaPy3MSEuMnE0Ca3QfDIk5D_yZwA9PZ/view?usp=drive_link">Industry Expectations and Skillset of Business Administration Graduates, Angeles City, Philippines</a></li>
+                </ul>
+            </div>
+
+            <!-- Tab 3 Content (hidden by default) -->
+            <div id="tab-3a" class="hidden tab-content">
+                <ul class="pl-4 list-disc">
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1M3PPhhQB01ZZX-X1VPH2aZXwT3fxnpEw/view?usp=drive_link">Attitudes of Filipino Millennials Towards Purchase and Consumption of Luxury Brands: Actual and Ideal Self-Congruity on Brand Attitude</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Tabbed Container-->
+
+<!--Tabbed Container-->
+<div class="container tab-cnt">
+    <!-- Tab Buttons -->
+    <ul class="flex">
+        <li class="flex-1">
+            <a href="#tab-1b" data-tab="tab-1b" class="tab-tabs">2020-2021</a>
+        </li>
+        <li class="flex-1">
+            <a href="#tab-2b" data-tab="tab-2b" class="tab-tabs">2021-2022</a>
+        </li>
+        <li class="flex-1">
+            <a href="#tab-3b" data-tab="tab-3b" class="tab-tabs">2022-2023</a>
+        </li>
+        <li class="flex-1">
+            <a href="#tab-4b" data-tab="tab-4b" class="tab-tabs">Research Proposals</a>
+        </li>
+    </ul>
+    <div class="tab-con">
+        <!-- Tab Content -->
+        <div class="tab-in">
+            <!-- Tab 1 Content (visible by default) -->
+            <div id="tab-1b" class="tab-content">
+                <ul class="pl-4 list-disc">
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1wG0KG1yguMqDor4neNzWyOGLhpYWv2vm/view?usp=drive_link">A Tracer Study of the BSBA (Bachelor of Science in Business Administration Graduates from 2017 to 2020, Systems Plus College Foundation</a></li>
+                </ul>
+            </div>
+
+            <!-- Tab 2 Content (hidden by default) -->
+            <div id="tab-2b" class="hidden tab-content">
+                <ul class="pl-4 list-disc">
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/10t6a3P047lQdk3gcJV2kx7V0dQQQXXxW/view?usp=drive_link">Correlates of Academic Performance of the BSA and BSAT Students of the College of Business, Systems Plus College Foundation</a></li>
+                </ul>
+            </div>
+
+            <!-- Tab 3 Content (hidden by default) -->
+            <div id="tab-3b" class="hidden tab-content">
+                <ul class="pl-4 list-disc">
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1od7i63p4eFhkB1EF-yVQ_US7nPCakIJt/view?usp=drive_link">On-the-Job Training (Practicum) and Academic Performance of the BSBA Students of the College of Business, Systems Plus College Foundation</a></li>
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1jLuwkdnPV3gvh1igpr0vbIBajQzJpPSO/view?usp=drive_link">Online Practicum Program during the Pandemic among COB Students of the Systems Plus College Foundation</a></li>
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1iiSNSyFvvZfwm0rmRV25cY-DlWrCQeDI/view?usp=drive_link">The Impact of Image, Role Models, Learning Approach, Course Content and Structure, and Course Delivery on the Entrepreneurial Motivation of University Students in Oman</a></li>
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1-Trkqbrs8-5QtVj3gEHCsTlSiehziCVG/view?usp=drive_link">The Relationship between Online Selling Through Social Media and Impulse Purchases among Young Professionals</a></li>
+                </ul>
+            </div>
+
+            <div id="tab-4b" class="hidden tab-content">
+                <ul class="pl-4 list-disc">
+                    <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1qV7399-0EXB3OF1G-dYtJlVsQ5IxAWSS/view?usp=drive_link">COB Research Proposals</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Tabbed Container-->
+
+<h2 class="text-2xl font-semibold my-4 mx-4">STUDENT THESIS</h2>
+
+<!--Tabbed Container-->
+<div class="container tab-cnt">
+    <!-- Tab Buttons -->
+    <ul class="flex">
+        <li class="flex-1">
+            <a href="#tab-1c" data-tab="tab-1c" class="tab-tabs">Case Studies</a>
+        </li>
+        <li class="flex-1">
+            <a href="#tab-2c" data-tab="tab-2c" class="tab-tabs">Feasibility Studies</a>
+        </li>
+        <li class="flex-1">
+            <a href="#tab-3c" data-tab="tab-3c" class="tab-tabs">Thesis</a>
+        </li>
+    </ul>
+    <div class="tab-con">
+        <!-- Tab Content -->
+        <div class="tab-in">
+            <!-- Tab 1 Content (visible by default) -->
+            <div id="tab-1c" class="tab-content">
+                <ul class="pl-4 list-disc">
+                    <li> 2020-2021
+                        <ul class="pl-8 list-disc mb-2">
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1Jg5Jgsn-5ERqZki5q67-_ARoug9HWA8F/view?usp=drive_link">Greenwood Resources: A Global Sustainable Venture in the Making</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/12-HfAHe4EYNILkBj5FHP-WhhSG2_TWW8/view?usp=drive_link">Zynga: Is the Game Over?</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/158chfMxRK0GFWqLJsBk_3Y1D8_BZM71l/view?usp=drive_link">McDonald’s Impact in 2017</a></li>
+                        </ul>
+                    </li>
+                    <li> 2021-2022
+                        <ul class="pl-8 list-disc mb-2">
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1uYSbpunp58iHLdGSJGEuCzhRPkZtPvun/view?usp=drive_link">COPORTA+: Co-Working Space located in Brgy. Sto. Rosario, Angeles City, Pampanga</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1CppzJ331BLV0aFf625d3UNRsFj822dlo/view?usp=drive_link">GO FOCUS</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1u5wmLKAQ3M22T1wA2ilCtc87BPyyYsUr/view?usp=drive_link">Keka Ne</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tab 2 Content (hidden by default) -->
+            <div id="tab-2c" class="hidden tab-content">
+                <ul class="pl-4 list-disc">
+                    <li> 2020-2021
+                        <ul class="pl-8 list-disc mb-2">
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1CJPZ7E49J8T_afnfKuhZDVngYT1Ym35e/view?usp=drive_link">PIANTA PATTY: A PLANT-BASED PRODUCT OF BEGIN VEGAN CORPORATION</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1uLzYDW-RrUQFfnzxBo21CvlC_GD5V8Wr/view?usp=drive_link">TOKYO PANCAKE FESTIVAL IN ANGELES CITY</a></li>
+                        </ul>
+                    </li>
+                    <li> 2022-2023
+                        <ul class="pl-8 list-disc mb-2">
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1fWSRvuBAKf3SA0iGxMuru3dflkukPlFp/view?usp=drive_link">ASSORTI FRUITS AND PASTRIES</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1kn8L074tZUC0nA0i36JjLhmjstsmdf21/view?usp=drive_link">BagEco (Your Kapampangan Tote Bag)</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1LrE6GOHUoYxABmlTOKfy1LHKFDFBDfym/view?usp=drive_link">COFI CO.</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1r8oJh6s66I6Vdy7x_BiptQ6SiEhqhR3x/view?usp=drive_link">GoFocus</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1kxCByVbnwZkCs823N2x8qa6e_74D-eyM/view?usp=drive_link">Iridescent Final</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tab 3 Content (hidden by default) -->
+            <div id="tab-3c" class="hidden tab-content">
+                <ul class="pl-4 list-disc">
+                    <li>2019-2020
+                        <ul class="pl-8 list-disc mb-2">
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1TghueAj09v1bMM4xMxhgGAJxb3Juif54/view?usp=drive_link">Brand Experience to Consumer Purchase Intention of Baby Charm Marquee Mall</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1JoUGV8JpW_18Xz22gvtIhvygZLgPpQ-9/view?usp=drive_link">THE RELATIONSHIP OF LEARNING CHOICE TACTICS AND POSITIVE REINFORCEMENT ON M.A.C BRAND SM CITY CLARK BRANCH</a></li>
+                        </ul>
+                    </li>
+                    <li>2020-2021
+                        <ul class="pl-8 list-disc mb-2">
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1iQj4moJB9BwepM3CLRTPwu5pOXU6_grz/view?usp=drive_link">THE EFFECT OF SOCIAL MEDIA MARKETING TO BRAND EQUITY OF LAZADA</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1wUVo5loHChwfxmm8tOiyTyIXZOEDd70F/view?usp=drive_link">THE CORRELATION OF BRAND PERSONALITY AND CUSTOMER PREFERENCES</a></li>
+                        </ul>
+                    </li>
+                    <li>2021-2022
+                        <ul class="pl-8 list-disc mb-2">
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1wHMIMl99jRnsTmdroPuY_X0tVqLiNLSS/view?usp=drive_link">E-BANKING S ERVICE QUALITY AND S ATIS FACTION ON BDO UNIBANK, INC: A CAS E OF YOUNG PROFES S IONALS IN ANGELES-CITY</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1FDq9vKA8oO8bUdEp4VrvXQ-EXIPzJiWz/view?usp=drive_link">Motivator Factors and Job Satisfaction: A Correlational Analysis of Selected Customs Brokers in Clark, Pampanga</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/14dO-qDuj7ie24uR8004jd02s3YDL_6xB/view?usp=drive_link">The Level of Awareness on Real Estate Investing: A Case of Young Professionals in San Fernando City, Pampanga</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/17Jluq6cpy5crAtUlDsJgSl6M05mJlqpl/view?usp=drive_link">THE CORRELATION OF SENSORY BRANDING TOWARDS POSITIVE BRAND IMAGE ON APPLE PRODUCTS: A CASE AMONGST MARKETING STUDENTS IN SYSTEMS PLUS COLLEGE FOUNDATION</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1rxD3aiyrtCyRi-7U9_CXxlrqoRBB9E2O/view?usp=drive_link">The Influence of Perceived Usefulness to User's Attitude on Mobile Payment Apps: A Case of Young Professionals in Angeles City</a></li>
+                            <li><a class="hover:text-[#4ac0fb] text-black mb-4"  href="https://drive.google.com/file/d/1PJwkRr9-2WUiOudJ59F1r5F6zuRtTPrR/view?usp=drive_link">THE INFLUENCE OF SOCIAL MEDIA MARKETING TOWARDS BRAND LOYALTY OF YOUNG PROFESSIONALS ON SAMSUNG SMARTHPHONES IN ANGELES CITY</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Tabbed Container-->
+
+
+
+<script>
+    const tabButtons = document.querySelectorAll('ul.flex a');
+  
+    tabButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = e.target.getAttribute('data-tab');
+  
+            // Hide all tab contents within the same container
+            const container = e.target.closest('.container');
+            const tabsInContainer = container.querySelectorAll('.tab-content');
+  
+            tabsInContainer.forEach((content) => {
+                content.classList.add('hidden');
+            });
+  
+            // Show the selected tab content within the same container
+            document.getElementById(target).classList.remove('hidden');
+        });
+    });
+</script>
+
+<!--Footer-->
+<footer class="ftr">
+    <div class="container" style="margin-left: auto; margin-right: auto;">
+        <div class="ftr-layout">
+            <!-- Footer Column 1 with Logo -->
+            <div class="ftr-margin flex items-center">
+                <img src="images/logo.png" alt="Company Logo" class="ftr-logo">
+                <h2 class="ftr-ttl">Systems Plus College Foundation</h2>
+            </div>
+
+            <!-- Footer Column 2 -->
+            <div class="ftr-margin">
+                <h2 class="ftr-ttl" style="margin-bottom: 0.5rem;">Admissions</h2>
+                <ul>
+                    <li><a href="#" class="footer-link">Online Application</a></li>
+                    <li><a href="#" class="footer-link">Academics</a></li>
+                    <li><a href="#" class="footer-link">Facilities</a></li>
+                </ul>
+            </div>
+
+            <!-- Footer Column 3 -->
+            <div class="ftr-margin">
+                <h2 class="ftr-ttl" style="margin-bottom: 0.5rem;">Contact Us</h2>
+                <ul>
+                    <li><a href="#" class="footer-link">Blog</a></li>
+                    <li><a href="#" class="footer-link">FAQs</a></li>
+                </ul>
+            </div>
+
+            <!-- Footer Column 4 with Up Arrow Button -->
+            <div class="ftr-btn-lo">
+                <button id="scrollToTop" class="ftr-btn bobble">
+                    <i class="mr-1 fas fa-angle-up text-4xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</footer> 
+<script>
+    // Get the button element
+    const scrollToTopButton = document.getElementById("scrollToTop");
+
+    // Add a click event listener to the button
+    scrollToTopButton.addEventListener("click", () => {
+        // Scroll to the top of the page with a smooth animation
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+</script>
+<!--Footer-->
+
+</body>
+</html>

@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://spcf.edu.ph/images/spcf.ico" type="image/png">
+    <title>Online Enrollment Application | Systems Plus College Foundation</title>
+</head>
+<style>
+        /* Add custom CSS for animations */
+        .container-enter-active, .container-leave-active {
+            transition: opacity 0.5s;
+        }
+        .container-enter, .container-leave-to {
+            opacity: 0;
+        }
+
+        .dropdown-container:hover .dropdown-content {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .dropdown-content {
+        display: block;
+        position: absolute;
+        background-color: #fff;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        }
+
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .fixed-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        @keyframes bobble {
+            0%, 100% {
+            transform: translateY(0);
+            }
+            50% {
+            transform: translateY(-20px);
+            }  
+        }
+
+        /* Apply the animation to the button on hover */
+        .bobble:hover {
+            animation: bobble 1s ease infinite;
+        }
+
+            /* Add this style to your existing CSS file or in a <style> tag in your HTML */
+        .footer-link {
+        color: white;
+        transition: color 0.3s ease, transform 0.3s ease;
+        transform: translateX(0); /* Initial position */
+        }
+
+        .footer-link:hover {
+        color: #3498db; /* Change to your desired hover color */
+        transform: translateX(5px); /* Adjust the value as needed for the desired slide effect */
+        }
+        
+        /* CSS for Counting Animation */
+        @keyframes countUp {
+          from { transform: translateY(10px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .count-up {
+          animation: countUp 1s ease-in-out;
+        }
+   
+        .circle-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+</style>
+
+<body>
+<!--Header-->
+<div>
+  <!--loading screen-->
+  <div id="loading-screen" class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-white z-50">
+      <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+      <script>
+          // JavaScript code to hide the loading screen when your website is ready
+          document.addEventListener("DOMContentLoaded", function () {
+              setTimeout(function () {
+                  document.getElementById("loading-screen").style.display = "none";
+              }, 2000); // Change the time as needed
+          });
+      </script>
+  <!--loading screen-->
+  
+  <!--Scroll Menu-->
+  
+  <div id="app">
+      <!-- Large screen containers (show on scroll) -->
+      <transition name="container" mode="out-in">
+      <div v-if="showLarge" key="large" class="scroll-hdr" style="z-index: 30;">
+          <div class="scr-hdr-prp">
+  
+              <div class="scr-hdr-tab dropdown-container" style="z-index: 30;">
+                  <button type="button" class="scr-hdr-btn">
+                      About
+                  </button>
+                  <ul class="dropdown-content">
+                      <li><a href="history.html" class="scr-hdr-drp">History</a></li>
+                      <li><a href="research.html" class="scr-hdr-drp">Research Database</a></li>
+                      <li><a href="spcnian-hymn.html" class="scr-hdr-drp">SPCNIAN Hymn</a></li>
+                  </ul>
+              </div>
+          
+              <div class="scr-hdr-tab dropdown-container">
+                  <button type="button" class="scr-hdr-btn">
+                      Admissions
+                  </button>
+                  <ul class="dropdown-content">
+                      <li><a href="adm-ol-app.html" class="scr-hdr-drp">Online Application</a></li>
+                  </ul>
+              </div>
+          
+              <div class="scr-hdr-tab dropdown-container">
+                      <button type="button" class="scr-hdr-btn">
+                          Academics
+                      </button>
+                      <ul class="dropdown-content">
+                          <li><a href="office-of-the-registrar.html" class="scr-hdr-drp">Office of the Registrar</a></li>
+                          <li><a href="basic-ed.html" class="scr-hdr-drp">Basic Education Department</a></li>
+                          <li><a href="acad-cassed.html" class="scr-hdr-drp">College Of Arts And Social Sciences And Education</a></li>
+                          <li><a href="acad-cob.html" class="scr-hdr-drp">College Of Business</a></li>
+                          <li><a href="acad-ccis.html" class="scr-hdr-drp">College Of Computing And Information Sciences</a></li>
+                          <li><a href="acad-COC.html" class="scr-hdr-drp">College Of Criminology</a></li>
+                          <li><a href="acad-coeng.html" class="scr-hdr-drp">College Of Engineering</a></li>
+                          <li><a href="acad-chm.html" class="scr-hdr-drp">College Of Hospitality Management</a></li>
+                          <li><a href="acad-con.html" class="scr-hdr-drp">College Of Nursing</a></li>
+                      </ul>
+              </div>
+              
+              <div class="scr-hdr-tab dropdown-container">
+                      <button type="button" class="scr-hdr-btn">
+                          Student Services
+                      </button>
+                      <ul class="dropdown-content">
+                          <li><a href="studserv-apc.html" class="scr-hdr-drp">Alumni And Placement Center</a></li>
+                          <li><a href="studserv-acap.html" class="scr-hdr-drp">Assessment, Counseling, And Placement Center</a></li>
+                          <li><a href="studserv-sag.html" class="scr-hdr-drp">Scholarships And Grants</a></li>
+                          <li><a href="studserv-osa.html" class="scr-hdr-drp">Student Affairs Program</a></li>
+                      </ul>
+              </div>
+          
+              <div class="scr-hdr-tab dropdown-container">
+                      <button type="button" class="scr-hdr-btn">
+                          Facilities
+                      </button>
+                      <ul class="dropdown-content">
+                          <li><a href="facilities.html" class="scr-hdr-drp">All Facilities</a></li>
+                      </ul>
+              </div>
+              
+              <div class="scr-hdr-tab dropdown-container">
+                      <button type="button" class="scr-hdr-btn">
+                          Data Privacy
+                      </button>
+                      <ul class="dropdown-content">
+                          <li><a href="breach-report.html" class="scr-hdr-drp">Breach Report</a></li>
+                      </ul>
+              </div>
+          
+              <div class="scr-hdr-tab dropdown-container">
+                      <button type="button" class="scr-hdr-btn">
+                          IELTS
+                      </button>
+                      <ul class="dropdown-content">
+                          <li><a href="IELTS.html" class="scr-hdr-drp">International English Language Testing System</a></li>
+                      </ul>
+              </div>
+      
+          </div> 
+      </div>
+  
+      </transition>
+      <!-- Large screen second containers (show on scroll) -->
+      <transition name="container" mode="out-in">
+          <div v-if="showLarge" key="large2" class="scroll-qal" style="z-index: 20;">
+              <div class="scr-qal-ttl">
+                  <!-- Large text on the left -->
+                  <div style="width: 50%;">
+                      <h1 class="scr-qal-txt">Quick Access Links</h1>
+                  </div>
+  
+                  <!-- Four square buttons on the right -->
+                  <div class="scr-qal-tab">
+                      <!-- Button 1 -->
+          <a href="https://spcf.edu.ph/enrollment/public/payment_form?fbclid=IwAR1vfJnVwn62NP9jKiAfYCeRPei-hEJlqij7JlHy-OSABj1tKVDxIDObpLE">
+          <div class="scr-qal-img image-button"
+              data-default-image="images/pay.png"
+              data-hover-image="images/pay_hover.png">
+              <img src="images/pay.png" alt="Button Icon 1" class="scr-qal-img-prp" />
+              <span class="text-[10px]">Pay Online</span>
+          </div>
+          </a>
+  
+          <!-- Button 2 -->
+          <a href="http://portal.spcf.edu.ph/Login.php">
+          <div class="scr-qal-img image-button"
+              data-default-image="images/portal.png"
+              data-hover-image="images/portal_hover.png">
+              <img src="images/portal.png" alt="Button Icon 2" class="scr-qal-img-prp" />
+              <span class="text-[10px]">Student Portal</span>
+          </div>
+          </a>
+  
+          <!-- Button 3 -->
+          <a href="http://box104.spcf.edu.ph/Login.php">
+          <div class="scr-qal-img image-button"
+              data-default-image="images/campus++.png"
+              data-hover-image="images/campus++_hover.png">
+              <img src="images/campus++.png" alt="Button Icon 3" class="scr-qal-img-prp" />
+              <span class="text-[10px]">Campus++</span>
+          </div>
+          </a>
+  
+          <!-- Button 4 -->
+          <a href="https://www.spcf.edu.ph/contact">
+          <div class="scr-qal-img image-button"
+                  data-default-image="images/contact.png"
+                  data-hover-image="images/contact_hover.png">
+              <img src="images/contact.png" alt="Button Icon" class="scr-qal-img-prp" />
+              <span class="text-[10px]">Contact Us</span>
+          </div>
+          </a>
+  
+                  </div>
+              </div>
+          </div>
+      </transition>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+  <script>
+      new Vue({
+          el: '#app',
+          data: {
+              showLarge: false,
+              showSmall: false,
+          },
+          mounted() {
+              window.addEventListener('scroll', this.handleScroll);
+              this.handleScroll(); // Trigger initial check
+          },
+          methods: {
+              handleScroll() {
+                  const scrollY = window.scrollY;
+                  // You can adjust the threshold as needed
+                  const threshold = 200;
+  
+                  // Show/hide the large screen containers
+                  if (window.innerWidth >= 1024) {
+                      this.showLarge = scrollY >= threshold;
+                  }
+  
+                  // Show/hide the small screen containers
+                  if (window.innerWidth < 1024) {
+                      this.showSmall = scrollY >= threshold;
+                  }
+              },
+          },
+      });
+  </script>
+  
+  <!--Scroll Menu-->
+  
+  <!-- Large screen containers (hidden on small screens) -->
+  <div class="header-prp">
+    <div class="hdr-cnt">
+      <!-- Logo on the left -->
+      <a href="index.html">
+      <div class="hdr-ctr">
+        <img src="images/logo.png" alt="Logo" class="hdr-logo" /> <!-- Adjust the image source and size accordingly -->
+        <h1 class="hdr-ttl" style="font-family: 'Times New Roman', Times, serif;">Systems Plus College Foundation</h1>
+      </div>
+      </a>
+      
+      <!-- Text and Button on the right -->
+      <div class="hdr-ctr">
+          <div>
+          <p class="hdr-txt">For inquires please contact Admissions Office</p>
+          <p class="hdr-contact">0919-069-2914</p>
+          </div>
+        <button class="hdr-btn">Apply Now!</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.x.x/dist/alpine.min.js" defer></script>
+  
+  <div class="navbar">
+      <div class="nav-prp">
+  
+          <div class="nav-drp dropdown-container">
+          <button type="button" class="nav-tab">
+              About
+          </button>
+          <ul class="dropdown-content">
+              <li><a href="history.html" class="nav-drp-menu">History</a></li>
+              <li><a href="research.html" class="nav-drp-menu">Research Database</a></li>
+              <li><a href="spcnian-hymn.html" class="nav-drp-menu">SPCNIAN Hymn</a></li>
+          </ul>
+          </div>
+  
+          <div class="relative inline-block text-left dropdown-container">
+          <button type="button" class="nav-tab">
+              Admissions
+          </button>
+          <ul class="dropdown-content">
+              <li><a href="adm-ol-app.html" class="nav-drp-menu">Online Application</a></li>
+          </ul>
+          </div>
+  
+          <div class="relative inline-block text-left dropdown-container">
+              <button type="button" class="nav-tab">
+                  Academics
+              </button>
+              <ul class="dropdown-content">
+                  <li><a href="office-of-the-registrar.html" class="nav-drp-menu">Office of the Registrar</a></li>
+                  <li><a href="basic-ed.html" class="nav-drp-menu">Basic Education Department</a></li>
+                  <li><a href="acad-cassed.html" class="nav-drp-menu">College Of Arts And Social Sciences And Education</a></li>
+                  <li><a href="acad-cob.html" class="nav-drp-menu">College Of Business</a></li>
+                  <li><a href="acad-ccis.html" class="nav-drp-menu">College Of Computing And Information Sciences</a></li>
+                  <li><a href="acad-COC.html" class="nav-drp-menu">College Of Criminology</a></li>
+                  <li><a href="acad-coeng.html" class="nav-drp-menu">College Of Engineering</a></li>
+                  <li><a href="acad-chm.html" class="nav-drp-menu">College Of Hospitality Management</a></li>
+                  <li><a href="acad-con.html" class="nav-drp-menu">College Of Nursing</a></li>
+                  
+              </ul>
+          </div>
+      
+          <div class="relative inline-block text-left dropdown-container">
+              <button type="button" class="nav-tab">
+                  Student Services
+              </button>
+              <ul class="dropdown-content">
+                  <li><a href="studserv-apc.html" class="nav-drp-menu">Alumni And Placement Center</a></li>
+                  <li><a href="studserv-acap.html" class="nav-drp-menu">Assessment, Counseling, And Placement Center</a></li>
+                  <li><a href="studserv-sag.html" class="nav-drp-menu">Scholarships And Grants</a></li>
+                  <li><a href="studserv-osa.html" class="nav-drp-menu">Student Affairs Program</a></li>
+              </ul>
+          </div>
+  
+          <div class="relative inline-block text-left dropdown-container">
+              <button type="button" class="nav-tab">
+                  Facilities
+              </button>
+              <ul class="dropdown-content">
+                  <li><a href="facilities.html" class="nav-drp-menu">All Facilities</a></li>
+              </ul>
+          </div>
+      
+          <div class="relative inline-block text-left dropdown-container">
+              <button type="button" class="nav-tab">
+                  Data Privacy
+              </button>
+              <ul class="dropdown-content">
+                  <li><a href="breach-report.html" class="nav-drp-menu">Breach Report</a></li>
+              </ul>
+          </div>
+  
+          <div class="relative inline-block text-left dropdown-container">
+              <button type="button" class="nav-tab">
+                  IELTS
+              </button>
+              <ul class="dropdown-content">
+                  <li><a href="IELTS.html" class="nav-drp-menu">International English Language Testing System</a></li>
+              </ul>
+          </div>
+  
+      </div> 
+  
+  </div>
+  
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const imageButtons = document.querySelectorAll('.image-button');
+  
+          imageButtons.forEach(button => {
+              const img = button.querySelector('img');
+              const defaultImage = img.src;
+              const hoverImage = button.getAttribute('data-hover-image');
+  
+              button.addEventListener('mouseenter', () => {
+                  img.src = hoverImage;
+              });
+  
+              button.addEventListener('mouseleave', () => {
+                  img.src = defaultImage;
+              });
+          });
+      });
+  </script>
+  
+  <div class="qal">
+      <div class="flex mx-16 lg:mx-32 py-2">
+      <!-- Large text on the left -->
+      <div style="width: 50%;">
+          <h1 class="qal-ttl">Quick Access Links</h1>
+      </div>
+  
+      <!-- Four square buttons on the right -->
+      <div class="qal-tab">
+          <!-- Button 1 -->
+          <a href="https://spcf.edu.ph/enrollment/public/payment_form?fbclid=IwAR1vfJnVwn62NP9jKiAfYCeRPei-hEJlqij7JlHy-OSABj1tKVDxIDObpLE">
+          <div class="qal-btn image-button"
+              data-default-image="images/pay.png"
+              data-hover-image="images/pay_hover.png">
+              <img src="images/pay.png" alt="Button Icon 1" class="h-6 w-6 mb-2" />
+              <span class="text-[10px]">Pay Online</span>
+          </div>
+          </a>
+  
+          <!-- Button 2 -->
+          <a href="http://portal.spcf.edu.ph/Login.php">
+          <div class="qal-btn image-button"
+              data-default-image="images/portal.png"
+              data-hover-image="images/portal_hover.png">
+              <img src="images/portal.png" alt="Button Icon 2" class="h-6 w-6 mb-2" />
+              <span class="text-[10px]">Student Portal</span>
+          </div>
+          </a>
+  
+          <!-- Button 3 -->
+          <a href="http://box104.spcf.edu.ph/Login.php">
+          <div class="qal-btn image-button"
+              data-default-image="images/campus++.png"
+              data-hover-image="images/campus++_hover.png">
+              <img src="images/campus++.png" alt="Button Icon 3" class="h-6 w-6 mb-2" />
+              <span class="text-[10px]">Campus++</span>
+          </div>
+          </a>
+  
+          <!-- Button 4 -->
+          <a href="https://www.spcf.edu.ph/contact">
+          <div class="qal-btn image-button"
+              data-default-image="images/contact.png"
+              data-hover-image="images/contact_hover.png">
+          <img src="images/contact.png" alt="Button Icon" class="h-6 w-6 mb-2" />
+          <span class="text-[10px]">Contact Us</span>
+          </div>
+          </a>
+  
+      </div>
+      </div>
+  </div>
+  
+  <!-- Small screen containers (hidden on large screens) -->
+  <!-- Header -->
+  <header class="m-hdr fixed-header">
+      <div class="m-hdr-cnt">
+          <button id="toggleSidebar" class="m-sb-btn">
+              &#9776;
+          </button>
+          <div class="hdr-ctr">
+              <img src="images/logo.png" alt="Logo" class="m-hdr-logo">
+              <h1 class="m-hdr-ttl">SPCF</h1>
+              <h1 class="m-hdr-txt">Systems Plus College Foundation</h1>
+          </div>
+      </div>
+  </header>
+  
+  <!-- Sidebar -->
+  <aside id="sidebar" class="m-sb fixed-sidebar">
+      <!-- Button to close the sidebar -->
+      <button id="closeSidebar" class="m-sb-x">
+          &#x2715;
+      </button>
+  
+      <!-- First Accordion -->
+      <div class="p-4">
+          <button class="m-sb-menu" onclick="toggleAccordion('accordion1')">Quick Access Links</button>
+          <div id="accordion1" class="hidden">
+              <ul>
+                  <li><a href="https://spcf.edu.ph/enrollment/public/payment_form?fbclid=IwAR1vfJnVwn62NP9jKiAfYCeRPei-hEJlqij7JlHy-OSABj1tKVDxIDObpLE" class="m-sb-drp">Pay Online</a></li>
+                  <li><a href="http://portal.spcf.edu.ph/Login.php" class="m-sb-drp">Student Portal</a></li>
+                  <li><a href="http://box104.spcf.edu.ph/Login.php" class="m-sb-drp">Campus++</a></li>
+                  <li><a href="https://www.spcf.edu.ph/contact" class="m-sb-drp">Contact Us</a></li>
+              </ul>
+          </div>
+      </div>
+  
+      <!-- Second Accordion -->
+      <div class="p-4">
+          <button class="m-sb-menu" onclick="toggleAccordion('accordion2')">About</button>
+          <div id="accordion2" class="hidden">
+              <ul>
+                  <li><a href="history.html" class="m-sb-drp">History</a></li>
+                  <li><a href="research.html" class="m-sb-drp">Research Database</a></li>
+                  <li><a href="spcnian-hymn.html" class="m-sb-drp">SPCNIAN Hymn</a></li>
+              </ul>
+          </div>
+      </div>
+  
+      <div class="p-4">
+          <button class="m-sb-menu" onclick="toggleAccordion('accordion3')">Admissions</button>
+          <div id="accordion3" class="hidden">
+              <ul>
+                  <li><a href="adm-ol-app.html" class="m-sb-drp">Online Application</a></li>
+              </ul>
+          </div>
+      </div>
+  
+      <div class="p-4">
+          <button class="m-sb-menu" onclick="toggleAccordion('accordion4')">Academics</button>
+          <div id="accordion4" class="hidden">
+              <ul>
+                  <li><a href="office-of-the-registrar.html" class="m-sb-drp">Office of the Registrar</a></li>
+                  <li><a href="basic-ed.html" class="m-sb-drp">Basic Education Department</a></li>
+                  <li><a href="acad-cassed.html" class="m-sb-drp">College Of Arts And Social Sciences And Education</a></li>
+                  <li><a href="acad-cob.html" class="m-sb-drp">College Of Business</a></li>
+                  <li><a href="acad-ccis.html" class="m-sb-drp">College Of Computing And Information Sciences</a></li>
+                  <li><a href="acad-cob.html" class="m-sb-drp">College Of Criminology</a></li>
+                  <li><a href="acad-coeng.html" class="m-sb-drp">College Of Engineering</a></li>
+                  <li><a href="acad-chm.html" class="m-sb-drp">College Of Hospitality Management</a></li>
+                  <li><a href="acad-con.html" class="m-sb-drp">College Of Nursing</a></li>
+              </ul>
+          </div>
+      </div>
+  
+      <div class="p-4">
+          <button class="m-sb-menu" onclick="toggleAccordion('accordion5')">Student Services</button>
+          <div id="accordion5" class="hidden">
+              <ul>
+                  <li><a href="studserv-apc.html" class="m-sb-drp">Alumni And Placement Center</a></li>
+                  <li><a href="studserv-acap.html" class="m-sb-drp">Assessment, Counseling, And Placement Center</a></li>
+                  <li><a href="studserv-sag.html" class="m-sb-drp">Scholarships And Grants</a></li>
+                  <li><a href="studserv-osa.html" class="m-sb-drp">Student Affairs Program</a></li>
+              </ul>
+          </div>
+      </div>
+  
+      <div class="p-4">
+          <button class="m-sb-menu" onclick="toggleAccordion('accordion6')">Facilities</button>
+          <div id="accordion6" class="hidden">
+              <ul>
+                  <li><a href="facilities.html" class="m-sb-drp">All Facilities</a></li>
+              </ul>
+          </div>
+      </div>
+  
+      <div class="p-4">
+          <button class="m-sb-menu" onclick="toggleAccordion('accordion7')">Data Privacy</button>
+          <div id="accordion7" class="hidden">
+              <ul>
+                  <li><a href="breach-report.html" class="m-sb-drp">Breach Report</a></li>
+              </ul>
+          </div>
+      </div>
+  
+      <div class="p-4">
+          <button href="IELTS.html" class="m-sb-menu" onclick="toggleAccordion('accordion8')">IELTS</button>
+          <div id="accordion8" class="hidden">
+              <ul>
+              </ul>
+          </div>
+      </div>
+  </aside>
+  
+  <script>
+      const toggleButton = document.getElementById('toggleSidebar');
+      const closeSidebarButton = document.getElementById('closeSidebar');
+      const sidebar = document.getElementById('sidebar');
+      let openAccordion = null;
+  
+      toggleButton.addEventListener('click', () => {
+          sidebar.classList.toggle('-translate-x-full');
+      });
+  
+      closeSidebarButton.addEventListener('click', () => {
+          sidebar.classList.add('-translate-x-full');
+      });
+  
+      function toggleAccordion(id) {
+          const accordion = document.getElementById(id);
+          if (accordion !== openAccordion) {
+              // Close the currently open accordion
+              if (openAccordion) {
+                  openAccordion.classList.add('hidden');
+              }
+              // Open the clicked accordion
+              accordion.classList.remove('hidden');
+              openAccordion = accordion;
+          } else {
+              // Toggle the clicked accordion if it's already open
+              accordion.classList.toggle('hidden');
+              openAccordion = null;
+          }
+      }
+  </script>
+</div>
+<!--Header-->
+
+<!--Spacer-->
+<div class="spcr"></div>
+<!--Spacer-->
+
+<div class="container mx-auto p-4 ">
+    <h1 class="text-2xl font-bold mb-4">Admission and Information</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <label for="text-input" class="block text-sm font-medium text-gray-700">LRN:</label>
+        <input type="text" id="text-input" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div>
+        <label for="dropdown-1" class="block text-sm font-medium text-gray-700">Level:</label>
+        <select id="dropdown-1" class="w-full mt-1 px-3 py-2 border rounded-md">
+          <option value="option0">Please Select</option>
+          <option value="option1">Grade School</option>
+          <option value="option2">Junior Highschool</option>
+          <option value="option3">Senior Highschool</option>
+          <option value="option4">College</option>
+          <option value="option5">Graduate Studies</option>
+        </select>
+      </div>
+      <div>
+        <label for="dropdown-2" class="block text-sm font-medium text-gray-700">Category:</label>
+        <select id="dropdown-2" class="w-full mt-1 px-3 py-2 border rounded-md">
+          <!-- Options for Dropdown 2 will be populated dynamically with JavaScript -->
+        </select>
+      </div>
+    </div>
+</div>
+
+<script>
+    const dropdown1 = document.getElementById('dropdown-1');
+    const dropdown2 = document.getElementById('dropdown-2');
+  
+    // Define options for Dropdown 2 based on Dropdown 1 selection
+    const optionsMap = {
+      option0: [],
+      option1: ['Nursery', 'Kinder 1', 'Kinder 2', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'],
+      option2: ['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'],
+      option3: ['Grade 11 ABM', 'Grade 11 STEM', 'Grade 11 HUMSS', 'Grade 11 GAS', 'Grade 11 TVL HE', 'Grade 11 TVL ICT', 'Grade 12 ABM', 'Grade 12 STEM', 'Grade 12 HUMSS', 'Grade 12 GAS', 'Grade 12 TVL HE', 'Grade 12 TVL ICT'],
+      option4: ['Certificate in Teacher Education', 'Bachelor of Science in Computer Science', 
+      'Bachelor of Science in Information System', 'Bachelor of Science in Information Technology', 
+      'Bachelor of Science in Entertaiment and Multimedia Computing', 'Bachelor of Physical Education', 'Bachelor of Elementary Education', 
+      'Bachelor of Secondary Education Major in English', 'Bachelor of Secondary Education Major in Math',
+    'Bachelor of Science in Tourism Management', 'Bachelor of Science in Restaurant Management',
+    'Bachelor of Science in Accountancy', 'Bachelor of Science in Accounting Information',
+    'Bachelor of Science in Business Administration', 'Bachelor of Science in Customs Administration', 
+    'Bachelor of Science in Real Estate Management', 'Bachelor of Science in Criminology',
+    'Bachelor of Science in Computer Engineering', 'Bachelor of Science in Electronic Engineering',
+    'Bachelor of Science in Nursing', 'Bachelor of Science in Social Work', 'Bachelor of Arts in Communication'],
+      option5: ['Master in Information Technology'],
+    };
+  
+    // Function to update Dropdown 2 options based on Dropdown 1 selection
+    function updateDropdown2Options() {
+      const selectedValue = dropdown1.value;
+      const options = optionsMap[selectedValue] || [];
+      
+      // Clear existing options
+      dropdown2.innerHTML = '';
+      
+      // Populate Dropdown 2 options
+      options.forEach((optionValue) => {
+        const option = document.createElement('option');
+        option.value = optionValue;
+        option.textContent = optionValue;
+        dropdown2.appendChild(option);
+      });
+    }
+  
+    // Initial update of Dropdown 2 options
+    updateDropdown2Options();
+  
+    // Add an event listener to Dropdown 1 to update Dropdown 2 options when it changes
+    dropdown1.addEventListener('change', updateDropdown2Options);
+</script>
+
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Personal Information</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="mb-4">
+        <label for="first-name" class="block text-sm font-medium text-gray-700">First Name:</label>
+        <input type="text" id="first-name" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="middle-name" class="block text-sm font-medium text-gray-700">Middle Name:</label>
+        <input type="text" id="middle-name" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="last-name" class="block text-sm font-medium text-gray-700">Last Name:</label>
+        <input type="text" id="last-name" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="date-of-birth" class="block text-sm font-medium text-gray-700">Date of Birth:</label>
+        <input type="date" id="date-of-birth" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="place-of-birth" class="block text-sm font-medium text-gray-700">Place of Birth:</label>
+        <input type="text" id="place-of-birth" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="gender" class="block text-sm font-medium text-gray-700">Gender:</label>
+        <select id="gender" class="w-full mt-1 px-3 py-2 border rounded-md">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="civil-status" class="block text-sm font-medium text-gray-700">Civil Status:</label>
+        <select id="civil-status" class="w-full mt-1 px-3 py-2 border rounded-md">
+          <option value="single">Single</option>
+          <option value="married">Married</option>
+          <option value="divorced">Divorced</option>
+          <option value="widowed">Widowed</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality:</label>
+        <input type="text" id="nationality" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="religion" class="block text-sm font-medium text-gray-700">Religion:</label>
+        <input type="text" id="religion" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+    </div>
+</div>
+
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Address Information</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="mb-4">
+        <label for="house-street" class="block text-sm font-medium text-gray-700">House No/Street:</label>
+        <input type="text" id="house-street" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="city" class="block text-sm font-medium text-gray-700">City:</label>
+        <input type="text" id="city" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="province" class="block text-sm font-medium text-gray-700">Province:</label>
+        <input type="text" id="province" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="zip-code" class="block text-sm font-medium text-gray-700">Zip Code:</label>
+        <input type="text" id="zip-code" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+    </div>
+</div>
+
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Contact Information</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="mb-4">
+        <label for="mobile-number" class="block text-sm font-medium text-gray-700">Mobile Number:</label>
+        <input type="tel" id="mobile-number" class="w-full mt-1 px-3 py-2 border rounded-md" placeholder="e.g., 123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+      </div>
+      <div class="mb-4">
+        <label for="email-address" class="block text-sm font-medium text-gray-700">Email Address:</label>
+        <input type="email" id="email-address" class="w-full mt-1 px-3 py-2 border rounded-md" placeholder="example@example.com">
+      </div>
+    </div>
+</div>
+
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Guardian's Information</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="mb-4">
+        <label for="mother-full-name" class="block text-sm font-medium text-gray-700">Mother's Full Name:</label>
+        <input type="text" id="mother-full-name" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="father-full-name" class="block text-sm font-medium text-gray-700">Father's Full Name:</label>
+        <input type="text" id="father-full-name" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="mother-occupation" class="block text-sm font-medium text-gray-700">Mother's Occupation:</label>
+        <input type="text" id="mother-occupation" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="father-occupation" class="block text-sm font-medium text-gray-700">Father's Occupation:</label>
+        <input type="text" id="father-occupation" class="w-full mt-1 px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="mother-contact" class="block text-sm font-medium text-gray-700">Mother's Contact Number:</label>
+        <input type="tel" id="mother-contact" class="w-full mt-1 px-3 py-2 border rounded-md" placeholder="e.g., 123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+      </div>
+      <div class="mb-4">
+        <label for="father-contact" class="block text-sm font-medium text-gray-700">Father's Contact Number:</label>
+        <input type="tel" id="father-contact" class="w-full mt-1 px-3 py-2 border rounded-md" placeholder="e.g., 123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Average Monthly Income:</label>
+        <div class="mt-1 space-y-2">
+          <label class="flex items-center">
+            <input type="radio" name="income" value="₱10,000 and below" class="mr-2">
+            ₱10,000 and below
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="income" value="₱10,001 to ₱20,000" class="mr-2">
+            ₱10,001 to ₱20,000
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="income" value="₱20,001 to ₱30,000" class="mr-2">
+            ₱20,001 to ₱30,000
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="income" value="₱30,001 to ₱40,000" class="mr-2">
+            ₱30,001 to ₱40,000
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="income" value="More than ₱40,000" class="mr-2">
+            More than ₱40,000
+          </label>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Education Background</h1>
+    <div class="space-y-6">
+      <!-- Elementary School -->
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Elementary School</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="mb-4">
+            <label for="elementary-name" class="block text-sm font-medium text-gray-700">School Name:</label>
+            <input type="text" id="elementary-name" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="elementary-address" class="block text-sm font-medium text-gray-700">School Address:</label>
+            <input type="text" id="elementary-address" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="elementary-completion-year" class="block text-sm font-medium text-gray-700">Year of Completion:</label>
+            <input type="text" id="elementary-completion-year" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Junior High School -->
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Junior High School</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="mb-4">
+            <label for="junior-high-name" class="block text-sm font-medium text-gray-700">School Name:</label>
+            <input type="text" id="junior-high-name" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="junior-high-address" class="block text-sm font-medium text-gray-700">School Address:</label>
+            <input type="text" id="junior-high-address" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="junior-high-completion-year" class="block text-sm font-medium text-gray-700">Year of Completion:</label>
+            <input type="text" id="junior-high-completion-year" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Senior High School -->
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Senior High School</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="mb-4">
+            <label for="senior-high-name" class="block text-sm font-medium text-gray-700">School Name:</label>
+            <input type="text" id="senior-high-name" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="senior-high-address" class="block text-sm font-medium text-gray-700">School Address:</label>
+            <input type="text" id="senior-high-address" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="senior-high-completion-year" class="block text-sm font-medium text-gray-700">Year of Completion:</label>
+            <input type="text" id="senior-high-completion-year" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+        </div>
+      </div>
+      
+      <!-- College -->
+      <div>
+        <h2 class="text-xl font-semibold mb-2">College</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="mb-4">
+            <label for="college-name" class="block text-sm font-medium text-gray-700">School Name:</label>
+            <input type="text" id="college-name" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="college-address" class="block text-sm font-medium text-gray-700">School Address:</label>
+            <input type="text" id="college-address" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="college-completion-year" class="block text-sm font-medium text-gray-700">Year of Completion:</label>
+            <input type="text" id="college-completion-year" class="w-full mt-1 px-3 py-2 border rounded-md">
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Admission Requirements</h1>
+    <p class="text-red-600">Kindly submit the following requirements at the Admissions Office</p>
+    <ul class="list-disc ml-6 space-y-2">
+      <li>Report Card/Form 138</li>
+      <li>Form 137</li>
+      <li>Certification of Good Moral Conduct</li>
+      <li>Photocopy of PSA Birth Certificate</li>
+      <li>4 pcs 2x2 Photo (White Background)</li>
+    </ul>
+</div>
+
+<div class="container mx-auto p-4">
+   
+    <!-- Checkbox for declaration -->
+    <div class="mb-4">
+      <label class="inline-flex items-center">
+        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600">
+        <span class="ml-2 text-sm font-medium text-gray-700">
+          I have read and certify that the data entries I provided in this Form are TRUE and CORRECT.
+        </span>
+      </label>
+    </div>
+  
+    <!-- Submit button -->
+    <div>
+      <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+        Submit Application
+      </button>
+    </div>
+</div>
+  
+<!--Footer-->
+<footer class="ftr">
+    <div class="container" style="margin-left: auto; margin-right: auto;">
+        <div class="ftr-layout">
+            <!-- Footer Column 1 with Logo -->
+            <div class="ftr-margin flex items-center">
+                <img src="images/logo.png" alt="Company Logo" class="ftr-logo">
+                <h2 class="ftr-ttl">Systems Plus College Foundation</h2>
+            </div>
+
+            <!-- Footer Column 2 -->
+            <div class="ftr-margin">
+                <h2 class="ftr-ttl" style="margin-bottom: 0.5rem;">Admissions</h2>
+                <ul>
+                    <li><a href="#" class="footer-link">Online Application</a></li>
+                    <li><a href="#" class="footer-link">Academics</a></li>
+                    <li><a href="#" class="footer-link">Facilities</a></li>
+                </ul>
+            </div>
+
+            <!-- Footer Column 3 -->
+            <div class="ftr-margin">
+                <h2 class="ftr-ttl" style="margin-bottom: 0.5rem;">Contact Us</h2>
+                <ul>
+                    <li><a href="#" class="footer-link">Blog</a></li>
+                    <li><a href="#" class="footer-link">FAQs</a></li>
+                </ul>
+            </div>
+
+            <!-- Footer Column 4 with Up Arrow Button -->
+            <div class="ftr-btn-lo">
+                <button id="scrollToTop" class="ftr-btn bobble">
+                    <i class="mr-1 fas fa-angle-up text-4xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</footer> 
+<script>
+    // Get the button element
+    const scrollToTopButton = document.getElementById("scrollToTop");
+
+    // Add a click event listener to the button
+    scrollToTopButton.addEventListener("click", () => {
+        // Scroll to the top of the page with a smooth animation
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+</script>
+<!--Footer-->
+
+</body>
+</html>
